@@ -1,13 +1,32 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-10">
-      <div v-if="chatHistory.responses.length">
+    <div class="max-w-md w-full space-y-10 rounded-lg border-2 border-gray-300 p-6">
+      <div v-for="(message, index) in chatHistory.conversation" :key="index" class="chat-container">
+        <div class="user-message p-4 mt-4 rounded bg-indigo-500 text-white text-right">
+          {{ message.question.content }}
+        </div>
+        <div class="bot-response p-4 mt-4 rounded bg-gray-300 text-black text-left">
+          {{ message.response.content }}
+        </div>
         <div
-          v-for="response in chatHistory.responses"
-          :key="response.content"
-          class="p-4 rounded bg-indigo-500 text-white"
+          v-if="isLoading && index === chatHistory.conversation.length - 1"
+          class="bot-loading p-4 mt-4 rounded bg-gray-300 text-black text-left"
         >
-          {{ response.content }}
+          <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
         </div>
       </div>
       <form @submit.prevent="chatStore.submitQuestion(question)" class="mt-8 space-y-6">
@@ -57,5 +76,23 @@ import { storeToRefs } from 'pinia'
 
 const chatStore = useChatStore()
 const question = ref('')
-const { chatHistory } = storeToRefs(chatStore)
+const { chatHistory, isLoading } = storeToRefs(chatStore)
 </script>
+
+<style scoped>
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #4f46e5;
+}
+
+.bot-response {
+  align-self: flex-start;
+  background-color: #d1d5db;
+}
+</style>

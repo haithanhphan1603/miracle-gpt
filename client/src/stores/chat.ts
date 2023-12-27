@@ -1,11 +1,22 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import { Chat } from '../types/types'
+import { Chat, ConversationItem } from '../types/types'
 
 export const useChatStore = defineStore('chatStore', () => {
-  const chatHistory = ref<Chat>({ messages: [], responses: [] }) // Initialize with default value
+  const chatHistory = ref<Chat>({ conversation: [] }) // Initialize with default value
+  const isLoading = ref(false)
+
   async function submitQuestion(question: string) {
+    const userMessage = { content: question, time: new Date() }
+    const conversationItem: ConversationItem = {
+      question: userMessage,
+      response: { content: '', time: new Date() } // Initialize with an empty response
+    }
+    chatHistory.value.conversation.push(conversationItem)
+
+    isLoading.value = true
+
     const response = await fetch('http://localhost:3000/chat', {
       method: 'POST',
       headers: {
@@ -17,12 +28,12 @@ export const useChatStore = defineStore('chatStore', () => {
     if (response.ok) {
       const data = await response.json()
       const botReply = { content: data.message.content, time: new Date() }
-      const userMessage = { content: question, time: new Date() }
-      chatHistory.value.messages.push(userMessage)
-      chatHistory.value.responses.push(botReply)
+      conversationItem.response = botReply // Update the response when it's received
     } else {
       console.error('Failed to fetch bot reply')
     }
+    isLoading.value = false
   }
-  return { chatHistory, submitQuestion }
+
+  return { chatHistory, isLoading, submitQuestion }
 })
