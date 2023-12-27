@@ -33,7 +33,7 @@ npm install
 cd client
 npm run dev
 
-// Run vue client
+// Run express server
 cd server
 npm start
 
