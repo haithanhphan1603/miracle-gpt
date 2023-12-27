@@ -1,8 +1,16 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-10">
-      <div class="p-4 rounded bg-indigo-500 text-white">{{ botResponse }}</div>
-      <form @submit.prevent="submit" class="mt-8 space-y-6">
+      <div v-if="chatHistory.responses.length">
+        <div
+          v-for="response in chatHistory.responses"
+          :key="response.content"
+          class="p-4 rounded bg-indigo-500 text-white"
+        >
+          {{ response.content }}
+        </div>
+      </div>
+      <form @submit.prevent="chatStore.submitQuestion(question)" class="mt-8 space-y-6">
         <div class="rounded-md shadow-sm -space-y-px">
           <div class="relative">
             <label for="question" class="sr-only">Ask Mircale-GPT</label>
@@ -44,22 +52,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const question = ref('')
-const botResponse = ref('Im willing to help')
-async function submit() {
-  const response = await fetch('http://localhost:3000/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ message: question.value })
-  })
+import { useChatStore } from '../stores/chat'
+import { storeToRefs } from 'pinia'
 
-  if (response.ok) {
-    const data = await response.json()
-    botResponse.value = data.message.content
-  } else {
-    console.error('Failed to fetch answer')
-  }
-}
+const chatStore = useChatStore()
+const question = ref('')
+const { chatHistory } = storeToRefs(chatStore)
 </script>
