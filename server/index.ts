@@ -1,9 +1,12 @@
 import express, { Request, Response } from "express";
 import OpenAI from "openai";
 import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 dotenv.config({ path: "config.env" });
 
