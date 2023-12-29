@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="chatStore.submitQuestion(question)" class="mt-8 space-y-6">
+  <form @submit.prevent="submit" class="mt-8 space-y-6 w-full">
     <div class="rounded-md shadow-sm -space-y-px">
       <div class="relative">
         <label for="question" class="sr-only">Ask Mircale-GPT</label>
@@ -43,6 +43,11 @@ import { useChatStore } from '../stores/chat'
 
 const chatStore = useChatStore()
 const question = ref('')
+
+function submit() {
+  chatStore.submitQuestion(question.value)
+  question.value = ''
+}
 </script>
 
 <style scoped></style>

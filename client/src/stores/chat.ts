@@ -27,7 +27,7 @@ export const useChatStore = defineStore('chatStore', () => {
 
     if (response.ok) {
       const data = await response.json()
-      const botReply = { content: data.message.content, time: new Date() }
+      const botReply = { content: data.message, time: new Date() }
       conversationItem.response = botReply // Update the response when it's received
     } else {
       console.error('Failed to fetch bot reply')
