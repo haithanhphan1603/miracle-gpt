@@ -2,10 +2,7 @@ import express, { Request, Response } from "express";
 import OpenAI from "openai";
 import dotenv from "dotenv";
 import cors from "cors";
-import {
-  ChatCompletionAssistantMessageParam,
-  ChatCompletionMessageParam,
-} from "openai/resources";
+import { ChatCompletionMessageParam } from "openai/resources";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,8 +47,6 @@ app.post("/chat", async (req: Request, res: Response) => {
       role: "assistant",
       content: botResponse,
     });
-    console.log(botResponse);
-
     res.status(200).json({ message: botResponse });
   } catch (error) {
     console.log(error);

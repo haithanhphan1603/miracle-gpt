@@ -38,15 +38,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { useChatStore } from '../stores/chat'
 
 const chatStore = useChatStore()
 const question = ref('')
 
+const emit = defineEmits(['submit'])
+
 function submit() {
   chatStore.submitQuestion(question.value)
   question.value = ''
+  emit('submit')
 }
 </script>
 

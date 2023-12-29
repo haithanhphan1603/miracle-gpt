@@ -1,9 +1,12 @@
 <template>
   <div class="chat-wrapper">
-    <div class="overflow-auto pb-2">
+    <div class="overflow-auto pb-4" ref="messages">
       <div v-for="(message, index) in chatHistory.conversation" :key="index" class="chat-container">
-        <div class="bot-response p-4 mt-4 rounded bg-gray-300 text-black text-left">
-          {{ message.response.content }}
+        <div class="flex mt-4 items-center">
+          <div class="avatar self-end flex-shrink-0 flex-grow-0"></div>
+          <div class="bot-response p-4 rounded bg-gray-300 text-black text-left">
+            {{ message.response.content }}
+          </div>
         </div>
         <div
           v-if="isLoading && index === chatHistory.conversation.length - 1"
@@ -22,7 +25,7 @@
         </div>
       </div>
     </div>
-    <chat-form class="chat-form"></chat-form>
+    <chat-form @submit="scrollBottom" class="chat-form"></chat-form>
   </div>
 </template>
 
@@ -31,9 +34,20 @@ import ChatForm from './ChatForm.vue'
 
 import { storeToRefs } from 'pinia'
 import { useChatStore } from '../stores/chat'
+import { onUpdated, ref } from 'vue'
 
 const chatStore = useChatStore()
 const { chatHistory, isLoading } = storeToRefs(chatStore)
+
+const messages = ref<HTMLElement>(null)
+
+onUpdated(() => scrollBottom())
+
+const scrollBottom = () => {
+  if (messages.value) {
+    messages.value.scrollTop = messages.value.scrollHeight
+  }
+}
 </script>
 
 <style scoped>
@@ -50,6 +64,16 @@ const { chatHistory, isLoading } = storeToRefs(chatStore)
 }
 .chat-form {
   margin-top: auto;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: url('https://www.thoughtco.com/thmb/GZD-Ax2jcBNV9bjQWIqU0toFTSk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/CharlesDarwin-5c2c3d7e46e0fb0001a343e3.jpg')
+    no-repeat center center;
+  background-size: cover;
+  margin-right: 10px;
 }
 
 .user-message {
