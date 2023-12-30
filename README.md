@@ -38,7 +38,9 @@ cd server
 npm start
 
 
->> MiracleGPT running at http://localhost:3000
+>> MiracleGPT server running at http://localhost:3000
+>> MiracleGPT client running at http://localhost:5173
+
 ```
 
 ## Author
