@@ -7,7 +7,7 @@
 
 ## Preview
 
-![preview](https://ibb.co/qnYMjnj)
+![preview](https://ibb.co/qnYMjnj/preview-png)
 
 
 **Frontend Stack:**
