@@ -5,6 +5,10 @@
 <div align="center">Full stack ChatGPT Application made with Vue 3, Express and OpenAI API.</div>
 
 
+## Preview
+
+![preview](https://i.ibb.co/SxwXyxy/Screenshot-2023-12-30-at-14-13-51.png)
+
 **Frontend Stack:**
 
 - Vue 3 & Composition API
@@ -38,7 +42,9 @@ cd server
 npm start
 
 
->> MiracleGPT running at http://localhost:3000
+>> MiracleGPT server running at http://localhost:3000
+>> MiracleGPT client running at http://localhost:5173
+
 ```
 
 ## Author
