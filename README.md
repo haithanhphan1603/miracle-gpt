@@ -5,6 +5,11 @@
 <div align="center">Full stack ChatGPT Application made with Vue 3, Express and OpenAI API.</div>
 
 
+## Preview
+
+![preview](https://ibb.co/qnYMjnj)
+
+
 **Frontend Stack:**
 
 - Vue 3 & Composition API
