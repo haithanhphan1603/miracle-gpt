@@ -1,11 +1,15 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import { useCharacterStore } from './character'
 
 import { Chat, ConversationItem } from '../types/types'
 
 export const useChatStore = defineStore('chatStore', () => {
   const chatHistory = ref<Chat>({ conversation: [] }) // Initialize with default value
   const isLoading = ref(false)
+
+  const characterStore = useCharacterStore()
+  const { currentCharacter } = storeToRefs(characterStore)
 
   async function submitQuestion(question: string) {
     const userMessage = { content: question, time: new Date() }
@@ -22,7 +26,7 @@ export const useChatStore = defineStore('chatStore', () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: question })
+      body: JSON.stringify({ message: question, characterName: currentCharacter.value?.name })
     })
 
     if (response.ok) {

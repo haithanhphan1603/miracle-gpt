@@ -1,12 +1,12 @@
 <template>
-  <div class="chat-wrapper">
+  <div v-if="currentCharacter" class="chat-wrapper">
     <div class="text-white flex items-center p-3 bg-indigo-500">
       <img
         class="w-12 rounded-full mr-2.5 h-12 border-white"
-        src="https://www.thoughtco.com/thmb/GZD-Ax2jcBNV9bjQWIqU0toFTSk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/CharlesDarwin-5c2c3d7e46e0fb0001a343e3.jpg"
+        :src="currentCharacter.avatarImage"
         alt="Avatar"
       />
-      <h2 class="chat-name">Charles Darwin</h2>
+      <h2 class="chat-name">{{ currentCharacter.name }}</h2>
     </div>
     <div class="overflow-auto pb-4 p-6" ref="messages">
       <div
@@ -17,7 +17,7 @@
         <div class="flex mt-4 items-center">
           <img
             class="w-12 rounded-full mr-2.5 h-12 border-white self-end flex-shrink-0 flex-grow-0"
-            src="https://www.thoughtco.com/thmb/GZD-Ax2jcBNV9bjQWIqU0toFTSk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/CharlesDarwin-5c2c3d7e46e0fb0001a343e3.jpg"
+            :src="currentCharacter.avatarImage"
             alt="Avatar"
           />
           <div
@@ -50,13 +50,19 @@ import ChatInput from './ChatInput.vue'
 import { storeToRefs } from 'pinia'
 import { useChatStore } from '../stores/chat'
 import { onUpdated, ref } from 'vue'
+import { useCharacterStore } from '@/stores/character'
 
 const chatStore = useChatStore()
 const { chatHistory, isLoading } = storeToRefs(chatStore)
 
+const characterStore = useCharacterStore()
+const { currentCharacter } = storeToRefs(characterStore)
+
 const messages = ref<HTMLElement>(null)
 
 onUpdated(() => scrollBottom())
+console.log('chatHistory:', chatHistory.value)
+console.log('currentCharacter:', currentCharacter.value)
 
 const scrollBottom = () => {
   if (messages.value) {

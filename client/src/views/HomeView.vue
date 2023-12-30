@@ -1,4 +1,5 @@
 <template>
+  <chat-header class="w-full"></chat-header>
   <div
     class="h-screen flex flex-col items-center justify-between bg-gray-50 py-6 px-4 sm:px-6 lg:px-8"
   >
@@ -11,5 +12,14 @@
 </template>
 
 <script setup lang="ts">
+import ChatHeader from '@/components/ChatHeader.vue'
 import ChatBox from '@/components/ChatBox.vue'
+import { useCharacterStore } from '@/stores/character'
+import { onMounted } from 'vue'
+
+const characterStore = useCharacterStore()
+
+onMounted(() => {
+  characterStore.fetchCharacters()
+})
 </script>
