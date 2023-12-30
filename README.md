@@ -30,15 +30,17 @@
 ## Installation
 
 ```bash
-// Install the required packages
-npm install
+// Clone and install 
+git clone https://github.com/haithanhphan1603/miracle-gpt.git
 
 // Run vue client
 cd client
+npm i
 npm run dev
 
 // Run express server
 cd server
+npm i
 npm start
 
 
