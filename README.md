@@ -7,7 +7,7 @@
 
 ## Preview
 
-![preview](https://ibb.co/qnYMjnj/preview-png)
+<a href="https://ibb.co/qnYMjnj"><img src="https://i.ibb.co/SxwXyxy/Screenshot-2023-12-30-at-14-13-51.png" alt="Screenshot-2023-12-30-at-14-13-51" border="0"></a>
 
 
 **Frontend Stack:**
