@@ -1,10 +1,11 @@
 <template>
-  <chat-header class="w-full"></chat-header>
   <div
-    class="h-screen flex flex-col items-center justify-between bg-gray-50 py-6 px-4 sm:px-6 lg:px-8"
+    class="h-screen w-screen flex justify-center items-center bg-gray-50"
+    :class="{ 'flex-col': smallerThanLg }"
   >
+    <chat-side-bar :class="smallerThanLg ? 'w-full' : 'h-full w-30'"></chat-side-bar>
     <div
-      class="max-w-xl w-full space-y-10 rounded-lg border-2 border-gray-300 flex flex-col justify-between h-full relative"
+      class="w-screen space-y-10 border-2 border-gray-300 flex flex-col justify-between h-full relative"
     >
       <chat-box class="overflow-auto"></chat-box>
     </div>
@@ -12,10 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import ChatHeader from '@/components/ChatHeader.vue'
+import ChatSideBar from '@/components/ChatSideBar.vue'
 import ChatBox from '@/components/ChatBox.vue'
 import { useCharacterStore } from '@/stores/character'
 import { onMounted } from 'vue'
+import useBreakpoints from '@/composables/use-breakpoints'
+
+const { smallerThanLg } = useBreakpoints()
 
 const characterStore = useCharacterStore()
 

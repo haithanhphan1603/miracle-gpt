@@ -1,3 +1,4 @@
+import { Chat } from '@/types/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -7,6 +8,7 @@ export interface Character {
   tone: string
   familiarField: string
   initialMessage: string
+  chatHistory: Chat
 }
 
 export const useCharacterStore = defineStore('characterStore', () => {
@@ -18,7 +20,10 @@ export const useCharacterStore = defineStore('characterStore', () => {
 
     if (response.ok) {
       const data = await response.json()
-      characters.value = data
+      characters.value = data.map((character: Character) => ({
+        ...character,
+        chatHistory: { conversation: [] }
+      }))
       currentCharacter.value = characters.value[0]
     } else {
       console.error('Failed to fetch characters')

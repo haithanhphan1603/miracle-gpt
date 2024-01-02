@@ -6,9 +6,8 @@ import path from "path";
 export interface Character {
   name: string;
   avatarImage: string;
-  tone: string;
-  familiarField: string;
-  initialMessage: string;
+
+  prompt: string;
 }
 
 export const characters: Character[] = JSON.parse(

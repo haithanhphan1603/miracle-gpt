@@ -2,10 +2,10 @@ import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useCharacterStore } from './character'
 
-import { Chat, ConversationItem } from '../types/types'
+import { ConversationItem } from '../types/types'
 
 export const useChatStore = defineStore('chatStore', () => {
-  const chatHistory = ref<Chat>({ conversation: [] }) // Initialize with default value
+  // Initialize with default value
   const isLoading = ref(false)
 
   const characterStore = useCharacterStore()
@@ -17,7 +17,7 @@ export const useChatStore = defineStore('chatStore', () => {
       question: userMessage,
       response: { content: '', time: new Date() } // Initialize with an empty response
     }
-    chatHistory.value.conversation.push(conversationItem)
+    currentCharacter.value.chatHistory.conversation.push(conversationItem)
 
     isLoading.value = true
 
@@ -39,5 +39,5 @@ export const useChatStore = defineStore('chatStore', () => {
     isLoading.value = false
   }
 
-  return { chatHistory, isLoading, submitQuestion }
+  return { isLoading, submitQuestion }
 })

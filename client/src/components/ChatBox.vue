@@ -1,16 +1,16 @@
 <template>
   <div v-if="currentCharacter" class="chat-wrapper">
-    <div class="text-white flex items-center p-3 bg-indigo-500">
+    <div class="flex items-center py-3 lg:pl-8 md:pl-6 sm:pl-4 bg-indigo-50">
       <img
         class="w-12 rounded-full mr-2.5 h-12 border-white"
         :src="currentCharacter.avatarImage"
         alt="Avatar"
       />
-      <h2 class="chat-name">{{ currentCharacter.name }}</h2>
+      <h2 class="chat-name text-indigo-950">{{ currentCharacter.name }}</h2>
     </div>
     <div class="overflow-auto pb-4 p-6" ref="messages">
       <div
-        v-for="(message, index) in chatHistory.conversation"
+        v-for="(message, index) in currentCharacter.chatHistory.conversation"
         :key="index"
         class="flex items-start overflow-y-auto flex-col-reverse"
       >
@@ -21,8 +21,8 @@
             alt="Avatar"
           />
           <div
-            v-if="isLoading && index === chatHistory.conversation.length - 1"
-            class="bot-loading p-4 mt-4 rounded bg-gray-300 text-black text-left"
+            v-if="isLoading && index === currentCharacter.chatHistory.conversation.length - 1"
+            class="bot-loading p-4 mt-4 rounded bg-gray-100 text-black text-left"
           >
             <div class="snippet py-2 px-4" data-title="dot-elastic">
               <div class="stage">
@@ -30,17 +30,17 @@
               </div>
             </div>
           </div>
-          <div v-else class="bot-response p-4 rounded bg-gray-300 text-black text-left">
+          <div v-else class="bot-response p-4 rounded bg-gray-100 text-black text-left">
             {{ message.response.content }}
           </div>
         </div>
 
-        <div class="user-message p-4 mt-4 rounded bg-indigo-500 text-white text-right">
+        <div class="user-message p-4 mt-4 rounded bg-indigo-50 text-white text-right">
           {{ message.question.content }}
         </div>
       </div>
     </div>
-    <chat-input @submit="scrollBottom" class="chat-form p-6"></chat-input>
+    <chat-input @submit="scrollBottom" class="chat-form bg-indigo-50 p-6"></chat-input>
   </div>
 </template>
 
@@ -53,7 +53,7 @@ import { onUpdated, ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
 
 const chatStore = useChatStore()
-const { chatHistory, isLoading } = storeToRefs(chatStore)
+const { isLoading } = storeToRefs(chatStore)
 
 const characterStore = useCharacterStore()
 const { currentCharacter } = storeToRefs(characterStore)
@@ -61,7 +61,6 @@ const { currentCharacter } = storeToRefs(characterStore)
 const messages = ref<HTMLElement>(null)
 
 onUpdated(() => scrollBottom())
-console.log('chatHistory:', chatHistory.value)
 console.log('currentCharacter:', currentCharacter.value)
 
 const scrollBottom = () => {

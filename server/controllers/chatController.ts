@@ -11,9 +11,7 @@ characters.forEach((character) => {
   conversationHistories[character.name] = [
     {
       role: "assistant",
-      content:
-        character.initialMessage +
-        ` with ${character.tone} tone, knowledge in ${character.familiarField}`,
+      content: character.prompt,
     },
   ];
 });
