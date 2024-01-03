@@ -2,13 +2,20 @@ import { Chat } from '@/types/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+enum Gender {
+  MALE = 'Male',
+  FEMALE = 'Female'
+}
+
 export interface Character {
   name: string
   avatarImage: string
-  tone: string
-  familiarField: string
-  initialMessage: string
+  prompt: string
+  dateOfBirth: string
   chatHistory: Chat
+  gender: Gender
+  description: string
+  profession: string
 }
 
 export const useCharacterStore = defineStore('characterStore', () => {

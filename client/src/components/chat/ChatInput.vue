@@ -10,12 +10,12 @@
           autocomplete="current-question"
           required
           v-model="question"
-          class="appearance-none relative block w-full px-3 py-4 border border-indigo-300 placeholder-indigo-500 text-indigo-900 rounded-md round-de focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+          class="appearance-none relative block w-full px-3 py-4 border border-violet-300 placeholder-violet-500 text-violet-900 rounded-md round-de focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
           placeholder="Ask Mircale-GPT"
         />
         <button
           type="submit"
-          class="absolute right-0 top-1/2 transform -translate-y-1/2 mr-4 group flex justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="absolute right-0 top-1/2 transform -translate-y-1/2 mr-4 group flex justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useChatStore } from '../stores/chat'
+import { useChatStore } from '@/stores/chat'
 
 const chatStore = useChatStore()
 const question = ref('')

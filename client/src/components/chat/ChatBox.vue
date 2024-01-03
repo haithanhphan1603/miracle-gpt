@@ -1,12 +1,12 @@
 <template>
   <div v-if="currentCharacter" class="chat-wrapper">
-    <div class="flex items-center py-3 lg:pl-8 md:pl-6 sm:pl-4 bg-indigo-50">
+    <div class="flex items-center py-3 lg:pl-8 md:pl-6 sm:pl-4 border-b">
       <img
         class="w-12 rounded-full mr-2.5 h-12 border-white"
         :src="currentCharacter.avatarImage"
         alt="Avatar"
       />
-      <h2 class="chat-name text-indigo-950">{{ currentCharacter.name }}</h2>
+      <h2 class="chat-name text-violet-950">{{ currentCharacter.name }}</h2>
     </div>
     <div class="overflow-auto pb-4 p-6" ref="messages">
       <div
@@ -30,17 +30,24 @@
               </div>
             </div>
           </div>
-          <div v-else class="bot-response p-4 rounded bg-gray-100 text-black text-left">
+          <div
+            v-else
+            v-tooltip.right="{ content: moment(message.response.time).format('h:mm a') }"
+            class="bot-response p-4 rounded bg-gray-100 text-black text-left"
+          >
             {{ message.response.content }}
           </div>
         </div>
 
-        <div class="user-message p-4 mt-4 rounded bg-indigo-50 text-white text-right">
+        <div
+          v-tooltip.left="{ content: moment(message.response.time).format('h:mm a') }"
+          class="user-message p-4 mt-4 rounded bg-violet-400 text-white text-right"
+        >
           {{ message.question.content }}
         </div>
       </div>
     </div>
-    <chat-input @submit="scrollBottom" class="chat-form bg-indigo-50 p-6"></chat-input>
+    <chat-input @submit="scrollBottom" class="chat-form border-t p-6"></chat-input>
   </div>
 </template>
 
@@ -48,9 +55,10 @@
 import ChatInput from './ChatInput.vue'
 
 import { storeToRefs } from 'pinia'
-import { useChatStore } from '../stores/chat'
+import { useChatStore } from '@/stores/chat'
 import { onUpdated, ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
+import moment from 'moment'
 
 const chatStore = useChatStore()
 const { isLoading } = storeToRefs(chatStore)
@@ -61,7 +69,6 @@ const { currentCharacter } = storeToRefs(characterStore)
 const messages = ref<HTMLElement>(null)
 
 onUpdated(() => scrollBottom())
-console.log('currentCharacter:', currentCharacter.value)
 
 const scrollBottom = () => {
   if (messages.value) {
@@ -97,7 +104,6 @@ const scrollBottom = () => {
 
 .user-message {
   align-self: flex-end;
-  background-color: #4f46e5;
 }
 
 .bot-response {
