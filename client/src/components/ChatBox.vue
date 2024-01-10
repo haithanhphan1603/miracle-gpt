@@ -1,5 +1,5 @@
 <template>
-  <div ref="messagesElement" class="flex-1 mx-2 mt-28 mb-2 sm:mt-20">
+  <div ref="messagesElement" class="mx-2 flex-grow overflow-auto py-4">
     <div
       v-for="(message, index) of conversationWithoutSystem"
       :key="index"

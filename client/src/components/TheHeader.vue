@@ -1,6 +1,6 @@
 <template>
   <header
-    class="top-0 fixed w-full text-white text-center px-6 py-4 flex items-center justify-between ring-1 ring-slate-900/5 bg-indigo-500"
+    class="top-0 sticky w-full text-white text-center px-6 py-4 flex items-center justify-between ring-1 ring-slate-900/5 bg-indigo-500"
   >
     <div class="flex items-center">
       <h1 class="text-2xl font-bold">Miracle GPT</h1>
