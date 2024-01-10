@@ -5,5 +5,6 @@ export default {
     extend: {}
   },
   plugins: [],
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}']
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'class'
 }

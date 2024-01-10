@@ -1,13 +1,4 @@
-export interface Chat {
-  conversation: ConversationItem[]
-}
-
-export interface ConversationItem {
-  question: Message
-  response: Message
-}
-
-interface Message {
+export interface Message {
+  role: 'user' | 'assistant' | 'system'
   content: string
-  time: Date
 }
