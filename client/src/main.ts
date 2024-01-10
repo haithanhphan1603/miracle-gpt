@@ -8,10 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import { faCopy, faCircleCheck, faSun, faMoon } from '@fortawesome/free-regular-svg-icons'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner, faGear } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faCopy, faCircleCheck, faSun, faMoon, faSpinner)
+library.add(faCopy, faCircleCheck, faSun, faMoon, faSpinner, faGear)
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

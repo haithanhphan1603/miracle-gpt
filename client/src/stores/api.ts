@@ -19,10 +19,6 @@ export const useApiStore = defineStore('api', () => {
   })
 
   const saveApiKey = (apiKey: string) => {
-    if (apiKey.slice(0, 3) !== 'sk-' || apiKey.length !== 51) {
-      alert('API Key Invalid! Please check again.')
-      return false
-    }
     const encryptedApiKey = cryptoJS.AES.encrypt(apiKey, secretKey).toString()
     localStorage.setItem('apiKey', encryptedApiKey)
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen" :class="{ 'bg-slate-800 text-white': isDark }">
+  <div class="flex flex-col h-screen dark:bg-slate-800 dark:text-white">
     <the-header></the-header>
     <chat-box></chat-box>
   </div>
