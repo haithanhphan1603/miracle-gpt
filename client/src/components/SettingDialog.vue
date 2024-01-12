@@ -67,7 +67,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useApiStore } from '../stores/api'
+import { useSettingStore } from '../stores/setting'
 import { useDark, useToggle } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 
@@ -80,8 +80,8 @@ interface Props {
 defineProps<Props>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 
-const apiStore = useApiStore()
-const { apiKey } = storeToRefs(apiStore)
+const settingStore = useSettingStore()
+const { apiKey } = storeToRefs(settingStore)
 
 const apiKeyInput = ref(apiKey.value)
 const error = ref('')
@@ -94,7 +94,7 @@ function submit() {
     error.value = 'Invalid API key. Please try again'
   } else {
     error.value = ''
-    apiStore.saveApiKey(apiKeyInput.value)
+    settingStore.saveApiKey(apiKeyInput.value)
     close()
   }
 }

@@ -3,7 +3,7 @@ import cryptoJS from 'crypto-js'
 import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
 
-export const useApiStore = defineStore('api', () => {
+export const useSettingStore = defineStore('setting', () => {
   const secretKey = 'fan-highh'
   const apiKeyInStorage = useLocalStorage('apiKey', '')
 

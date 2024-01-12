@@ -18,13 +18,14 @@
 
 <script lang="ts" setup>
 import SettingDialog from './SettingDialog.vue'
+
 import { useToggle } from '@vueuse/core'
 import { ref } from 'vue'
-import { useApiStore } from '../stores/api'
+import { useSettingStore } from '../stores/setting'
 import { storeToRefs } from 'pinia'
 
-const apiStore = useApiStore()
-const { apiKey } = storeToRefs(apiStore)
+const settingStore = useSettingStore()
+const { apiKey } = storeToRefs(settingStore)
 
 const showDialog = ref(!apiKey.value)
 const toggleDialog = useToggle(showDialog)

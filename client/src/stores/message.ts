@@ -2,7 +2,7 @@ import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { Message } from '../types/types'
 import { useGpts } from '../lib/gpts'
-import { useApiStore } from './api'
+import { useSettingStore } from './setting'
 
 export const useMessageStore = defineStore('message', () => {
   const conversation = ref<Message[]>([
@@ -18,8 +18,8 @@ export const useMessageStore = defineStore('message', () => {
     }
   ])
 
-  const apiStore = useApiStore()
-  const { apiKey } = storeToRefs(apiStore)
+  const settingStore = useSettingStore()
+  const { apiKey } = storeToRefs(settingStore)
 
   async function sendMessage(message: Message) {
     conversation.value.push(message)
