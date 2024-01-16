@@ -7,7 +7,7 @@
 
 ## Preview
 
-![preview](https://i.ibb.co/thgMh10/demo.png)
+<a href="https://ibb.co/thgMh10"><img src="https://i.ibb.co/vBpxBMN/demo.png" alt="demo" border="0" /></a>
 
 
 **Frontend Stack:**
