@@ -7,7 +7,8 @@
 
 ## Preview
 
-![preview](https://i.ibb.co/SxwXyxy/Screenshot-2023-12-30-at-14-13-51.png)
+![preview](https://i.ibb.co/vBpxBMN/demo.png)
+
 
 **Frontend Stack:**
 
