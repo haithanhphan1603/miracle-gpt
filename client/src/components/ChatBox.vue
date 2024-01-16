@@ -1,55 +1,10 @@
 <template>
-  <div ref="messagesElement" class="mx-2 flex-grow overflow-auto py-4">
+  <div ref="messagesElement" class="mx-2 flex-grow flex flex-col overflow-auto py-4">
     <template v-if="chatMode === ChatMode.NORMAL">
-      <div
-        v-for="(message, index) of conversationWithoutSystem"
-        :key="index"
-        class="group flex flex-col px-4 py-3 rounded-lg dark:hover:bg-slate-900 hover:bg-slate-100"
-      >
-        <div class="flex justify-between items-center mb-2">
-          <div class="font-bold">{{ message.role.toUpperCase() }}：</div>
-          <button
-            class="invisible group-hover:visible text-slate-400"
-            @click="copy(message.content)"
-          >
-            <font-awesome-icon v-if="copied" :icon="['far', 'circle-check']" />
-            <font-awesome-icon v-else :icon="['far', 'copy']" />
-          </button>
-        </div>
-        <div>
-          <div
-            class="text-sm leading-relaxed text-slate-600 dark:text-slate-400"
-            v-if="message.content"
-          >
-            {{ message.content }}
-          </div>
-          <div v-else>
-            <font-awesome-icon icon="fa-solid fa-spinner" spin />
-          </div>
-        </div>
-      </div>
+      <normal-chat :conversation="conversationWithoutSystem"></normal-chat>
     </template>
-
     <template v-else>
-      <div
-        v-for="(message, index) of conversationWithoutSystem"
-        :key="index"
-        class="group flex flex-col px-4 py-3 rounded-lg"
-        :class="{
-          'text-right ml-auto bg-blue-200': message.role === 'user',
-          'text-left mr-auto bg-gray-200': message.role === 'assistant'
-        }"
-      >
-        <div
-          class="text-sm leading-relaxed text-slate-600 dark:text-slate-400"
-          v-if="message.content"
-        >
-          {{ message.content }}
-        </div>
-        <div v-else>
-          <font-awesome-icon icon="fa-solid fa-spinner" spin />
-        </div>
-      </div>
+      <messenger-chat :conversation="conversationWithoutSystem"></messenger-chat>
     </template>
   </div>
 
@@ -75,13 +30,13 @@
 
 <script setup lang="ts">
 import { ref, computed, onUpdated } from 'vue'
-import { useClipboard } from '@vueuse/core'
 import { useMessageStore } from '../stores/message'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from '../stores/setting'
 import { ChatMode } from '../types/types'
 
-const { copy, copied } = useClipboard()
+import NormalChat from './NormalChat.vue'
+import MessengerChat from './MessengerChat.vue'
 
 const userMessage = ref('')
 const isGenerating = ref(false)

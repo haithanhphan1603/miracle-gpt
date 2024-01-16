@@ -29,10 +29,10 @@
               class="w-full p-2 border-2 border-gray-300 dark:bg-slate-800 dark:text-slate-200 text-slate-600 rounded-md focus:outline-none focus:border-slate-500"
               type="password"
               placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
-              v-model="apiKey"
+              v-model="apiKeyInput"
               @keydown.enter="submit"
             />
-            <span v-if="error" class="text-red-500">{{ error }}</span>
+            <div v-if="error" class="text-red-500 mt-1">{{ error }}</div>
 
             <label class="block mb-2 mt-4 font-medium">Theme</label>
             <div class="flex">
