@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { Message } from '../types/types'
+import type { Message } from '../types/types'
 import { useGpts } from '../lib/gpts'
 import { useSettingStore } from './setting'
 

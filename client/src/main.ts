@@ -1,5 +1,5 @@
 import './assets/index.css'
-import App from './App.vue' // Add the missing import statement for './App.vue'
+import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 

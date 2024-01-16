@@ -1,14 +1,15 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
-  "include": ["client/env.d.ts", "client/src/**/*", "client/src/**/*.vue"],
-  "exclude": ["client/src/**/__tests__/*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./client/src/*"]
+      "@/*": ["./src/*"]
     },
     "esModuleInterop": true,
+    "disableSolutionSearching": true
   }
 }

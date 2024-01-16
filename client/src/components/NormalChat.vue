@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '../types/types'
+import type { Message } from '../types/types'
 import { useClipboard } from '@vueuse/core'
 
 const { copy, copied } = useClipboard()

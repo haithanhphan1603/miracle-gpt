@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '../types/types'
+import type { Message } from '../types/types'
 
 interface Props {
   conversation: Message[]
