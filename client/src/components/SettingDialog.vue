@@ -13,15 +13,16 @@
           <header class="p-4">
             <h2 class="text-2xl font-bold">Settings</h2>
             <p class="pt-1">
-              You can find your API key at
+              You can find your API key
               <a
                 class="underline"
                 target="_blank"
                 href="https://platform.openai.com/account/api-keys"
-                >OpenAI API keys</a
+                >here</a
               >
             </p>
           </header>
+
           <section class="p-4">
             <label class="block mb-2 font-medium">API Key</label>
             <input
@@ -50,7 +51,25 @@
                 <font-awesome-icon :icon="['far', 'moon']" />
               </button>
             </div>
+
+            <label class="block mb-2 font-medium mt-4">Chat Mode</label>
+
+            <label
+              v-for="mode in ChatMode"
+              :key="`chat-mode-${mode}`"
+              class="flex felx-col items-center"
+            >
+              <input
+                type="radio"
+                class="form-radio"
+                :name="mode"
+                :value="mode"
+                v-model="chatMode"
+              />
+              <span class="ml-2">{{ toUpperFirstCase(mode) }}</span>
+            </label>
           </section>
+
           <div v-if="!fixed" class="p-4">
             <button
               class="bg-indigo-700 w-full hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded"
@@ -70,6 +89,7 @@ import { ref } from 'vue'
 import { useSettingStore } from '../stores/setting'
 import { useDark, useToggle } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
+import { ChatMode } from '../types/types'
 
 interface Props {
   show: boolean
@@ -81,13 +101,17 @@ defineProps<Props>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 
 const settingStore = useSettingStore()
-const { apiKey } = storeToRefs(settingStore)
+const { apiKey, chatMode } = storeToRefs(settingStore)
 
 const apiKeyInput = ref(apiKey.value)
 const error = ref('')
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+function toUpperFirstCase(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 function submit() {
   if (apiKeyInput.value.slice(0, 3) !== 'sk-' || apiKeyInput.value.length !== 51) {

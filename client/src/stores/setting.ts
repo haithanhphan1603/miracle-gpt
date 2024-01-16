@@ -2,10 +2,13 @@ import { defineStore } from 'pinia'
 import cryptoJS from 'crypto-js'
 import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
+import { ChatMode } from '../types/types'
 
 export const useSettingStore = defineStore('setting', () => {
   const secretKey = 'fan-highh'
   const apiKeyInStorage = useLocalStorage('apiKey', '')
+
+  const chatMode = useLocalStorage('chatMode', ChatMode.NORMAL)
 
   const apiKey = computed(() => {
     if (apiKeyInStorage.value === '') {
@@ -18,12 +21,18 @@ export const useSettingStore = defineStore('setting', () => {
     return decryptedApiKey
   })
 
+  const changeChatMode = (mode: ChatMode) => {
+    chatMode.value = mode
+  }
+
   const saveApiKey = (apiKey: string) => {
     const encryptedApiKey = cryptoJS.AES.encrypt(apiKey, secretKey).toString()
     localStorage.setItem('apiKey', encryptedApiKey)
   }
   return {
     saveApiKey,
-    apiKey
+    apiKey,
+    changeChatMode,
+    chatMode
   }
 })
