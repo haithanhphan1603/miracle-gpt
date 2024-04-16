@@ -27,6 +27,7 @@ export const useMessageStore = defineStore('message', () => {
       role: 'assistant',
       content: ''
     })
+    console.log(apiKey.value)
     const botResponse = await useGpts(conversation.value, apiKey.value)
     conversation.value[conversation.value.length - 1].content =
       botResponse.choices[0].message.content

@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import TheHeader from '../components/TheHeader.vue'
-import ChatBox from '../components/ChatBox.vue'
+import TheHeader from '@/components/TheHeader.vue'
+import ChatBox from '@/components/ChatBox.vue'
 </script>
