@@ -1,27 +1,17 @@
 import type { Message } from '../types/types'
+import OpenAI from 'openai'
 
 export async function useGpts(messageList: Message[], apiKey: string) {
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: messageList
-      })
+    const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true })
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: messageList
     })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-    return data
+    return completion.choices[0].message
   } catch (error) {
     console.error('Failed to fetch bot reply')
+    alert(`Error : ${error}`)
     throw error
   }
 }
