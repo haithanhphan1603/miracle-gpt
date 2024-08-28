@@ -32,6 +32,7 @@ export const useMessageStore = defineStore('message', () => {
       conversation.value[conversation.value.length - 1].content =
         botResponse.choices[0].message.content
     } catch (error) {
+      conversation.value[conversation.value.length - 1].content = 'Failed to fetch bot reply'
       console.error('Failed to send message', error)
       isChatDisable.value = true
     }
