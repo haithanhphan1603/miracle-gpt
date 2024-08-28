@@ -19,18 +19,22 @@ export const useMessageStore = defineStore('message', () => {
   ])
 
   const settingStore = useSettingStore()
-  const { apiKey } = storeToRefs(settingStore)
+  const { apiKey, isChatDisable } = storeToRefs(settingStore)
 
   async function sendMessage(message: Message) {
-    conversation.value.push(message)
-    conversation.value.push({
-      role: 'assistant',
-      content: ''
-    })
-    console.log(apiKey.value)
-    const botResponse = await useGpts(conversation.value, apiKey.value)
-    conversation.value[conversation.value.length - 1].content =
-      botResponse.choices[0].message.content
+    try {
+      conversation.value.push(message)
+      conversation.value.push({
+        role: 'assistant',
+        content: ''
+      })
+      const botResponse = await useGpts(conversation.value, apiKey.value)
+      conversation.value[conversation.value.length - 1].content =
+        botResponse.choices[0].message.content
+    } catch (error) {
+      console.error('Failed to send message', error)
+      isChatDisable.value = true
+    }
   }
   return {
     conversation,

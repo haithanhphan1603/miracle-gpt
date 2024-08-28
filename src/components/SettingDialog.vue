@@ -103,7 +103,6 @@ const emit = defineEmits<{ (e: 'close'): void }>()
 const settingStore = useSettingStore()
 const { apiKey, chatMode } = storeToRefs(settingStore)
 
-const API_KEY_LENGTH = 132
 const apiKeyInput = ref(apiKey.value)
 const error = ref('')
 
@@ -115,7 +114,7 @@ function toUpperFirstCase(string: string) {
 }
 
 function submit() {
-  if (apiKeyInput.value.slice(0, 3) !== 'sk-' || apiKeyInput.value.length !== API_KEY_LENGTH) {
+  if (apiKeyInput.value.slice(0, 3) !== 'sk-') {
     error.value = 'Invalid API key. Please try again'
   } else {
     error.value = ''

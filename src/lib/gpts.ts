@@ -9,12 +9,18 @@ export async function useGpts(messageList: Message[], apiKey: string) {
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini	',
         messages: messageList
       })
     })
 
     if (!response.ok) {
+      if (response.status === 429) {
+        alert('You have exceeded your API quota. Please check your plan and billing details.')
+        throw new Error(
+          'You have exceeded your API quota. Please check your plan and billing details.'
+        )
+      }
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
