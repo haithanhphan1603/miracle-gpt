@@ -29,7 +29,7 @@
               class="w-full p-2 border-2 border-gray-300 dark:bg-slate-800 dark:text-slate-200 text-slate-600 rounded-md focus:outline-none focus:border-slate-500"
               type="password"
               placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
-              v-model="apiKey"
+              v-model="apiKeyInput"
               @keydown.enter="submit"
             />
             <div v-if="error" class="text-red-500 mt-1">{{ error }}</div>
@@ -103,6 +103,7 @@ const emit = defineEmits<{ (e: 'close'): void }>()
 const settingStore = useSettingStore()
 const { apiKey, chatMode } = storeToRefs(settingStore)
 
+const apiKeyInput = ref(apiKey.value)
 const error = ref('')
 
 const isDark = useDark()
@@ -113,11 +114,11 @@ function toUpperFirstCase(string: string) {
 }
 
 function submit() {
-  if (apiKey.value.slice(0, 3) !== 'sk-' || apiKey.value.length !== 51) {
+  if (apiKeyInput.value.slice(0, 3) !== 'sk-' || apiKeyInput.value.length !== 51) {
     error.value = 'Invalid API key. Please try again'
   } else {
     error.value = ''
-    settingStore.saveApiKey(apiKey.value)
+    settingStore.saveApiKey(apiKeyInput.value)
     close()
   }
 }
