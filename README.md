@@ -2,10 +2,7 @@
 <h1> ⭐️ Miracle-GPT</h1>
 </div>
 
-<div align="center">Full stack ChatGPT Application made with Vue 3, Express and OpenAI API.</div>
-
-
-
+<div align="center">ChatGPT Application made with Vue 3, Typescript and OpenAI API.</div>
 
 
 **Frontend Stack:**
@@ -18,14 +15,6 @@
 
 - Typescript
 
-**Backend Stack:**
-
-- Nodejs and ExpressJs
-
-- JSON-Server
-
-- Openai API
-
 ## Installation
 
 ```bash
@@ -37,13 +26,7 @@ cd client
 npm i
 npm run dev
 
-// Run express server
-cd server
-npm i
-npm start
 
-
->> MiracleGPT server running at http://localhost:3000
 >> MiracleGPT client running at http://localhost:5173
 
 ```
